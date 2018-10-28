@@ -1,0 +1,22 @@
+{
+    "genIssues": [
+        {
+            "id" : 1,
+            "name": "billing",
+            "description": "url",
+            "type": "generic"
+        },
+        {
+            "id" : 2,
+            "name": "technical",
+            "description": "url",
+            "type": "generic"
+        },
+        {
+            "id": 3,
+            "name": "machine generated",
+            "description": "Generted on date 08/08/2018",
+            "type": "specific"
+        }
+    ]
+}
