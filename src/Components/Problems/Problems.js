@@ -35,22 +35,31 @@ class Problems extends  React.Component{
         const userId = this.props.match.params.userId;
         if(userId && this.state.userId !== userId){
             this.setState({isLoading: true, userId: userId});
-            axios.get('/user/help/'+userId).then(resp => {
-                axios.get('/user/issues/'+userId).then(resp => {
-                    /*let userIssue  = {};
-                    resp = resp.data;
-                    if(resp.userIssue) {
-                        userIssue.id = resp.userIssue.id;
-                        userIssue.name = resp.userIssue.id + " " + resp.userIssue.date;
-                        userIssue.description = "User Generated";
-                        resp.genIssues.push(userIssue);
-                    }*/
+            axios.get('http://10.21.55.203:9000/api/v1/user/help/'+userId).then(resp => {
+                console.log(resp);
+                axios.get('http://10.21.55.203:9000/api/v1/user/issues/'+userId).then(resp => {
+                    console.log(resp.data);
                     this.setState({
                         isLoading: false,
-                        problems: resp.genIssues
+                        problems: resp.data.genIssues
                     });
                 });
             });
+            /*axios.get('http://localhost:3004/genIssues').then(resp => {
+                /!*let userIssue  = {};
+                resp = resp.data;
+                if(resp.userIssue) {
+                    userIssue.id = resp.userIssue.id;
+                    userIssue.name = resp.userIssue.id + " " + resp.userIssue.date;
+                    userIssue.description = "User Generated";
+                    resp.genIssues.push(userIssue);
+                }*!/
+                console.log(resp);
+                this.setState({
+                    isLoading: false,
+                    problems: resp.data
+                });
+            });*/
         }
     }
     selfFix = (event) => {
@@ -59,7 +68,10 @@ class Problems extends  React.Component{
     };
     requestRep = (event) => {
         event.preventDefault();
-        axios.post('/api/user/issues', this.state.problem).then(resp => {
+        const {problem} = this.state;
+        problem.details = this.state.problemDesc;
+        axios.post('http://10.21.55.203:9000/api/v1/user/issues', problem).then(resp => {
+            console.log(resp);
             sessionStorage.removeItem('description');
             this.props.history.push('/');
         });

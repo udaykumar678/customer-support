@@ -14,10 +14,12 @@ class Support extends React.Component{
     }
     clickHandler = () => {
         console.log(this.props);
-        this.props.history.push('user/check-problems/'+this.state.user.userId);
+        this.props.history.push('user/check-problems/'+this.state.user.id);
+        //this.props.history.push('user/check-problems/1');
     };
     componentDidMount(){
-        axios.get('/api/users').then(resp => {
+        axios.get('http://10.21.55.203:9000/api/v1/users').then(resp => {
+            console.log(resp);
             const users = resp.data;
             const rIndex = Math.floor(Math.random() * users.length);
             const rUser = users[rIndex];
