@@ -1,5 +1,7 @@
 {
     "userIssue": {
+        "id": 2,
+        "date": "08/08/2018",
         "user_id": 1,
         "issue_status": "unresolved",
         "issue_origin": "user",
