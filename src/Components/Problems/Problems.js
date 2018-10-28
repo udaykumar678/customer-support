@@ -35,9 +35,9 @@ class Problems extends  React.Component{
         const userId = this.props.match.params.userId;
         if(userId && this.state.userId !== userId){
             this.setState({isLoading: true, userId: userId});
-            axios.get('http://10.21.55.203:9000/api/v1/user/help/'+userId).then(resp => {
-                console.log(resp);
-                axios.get('http://10.21.55.203:9000/api/v1/user/issues/'+userId).then(resp => {
+            axios.get('http://localhost:9000/api/v1/user/help/'+userId).then(resp => {
+                console.log(userId);
+                axios.get('http://localhost:9000/api/v1/user/issues/'+userId).then(resp => {
                     console.log(resp.data);
                     this.setState({
                         isLoading: false,
@@ -70,10 +70,11 @@ class Problems extends  React.Component{
         event.preventDefault();
         const {problem} = this.state;
         problem.details = this.state.problemDesc;
-        axios.post('http://10.21.55.203:9000/api/v1/user/issues', problem).then(resp => {
+        axios.post('http://localhost:9000/api/v1/user/issues/4', problem).then(resp => {
             console.log(resp);
             sessionStorage.removeItem('description');
-            this.props.history.push('/');
+            this.props.history.push('/user/check-problem/done/');
+
         });
     };
     render(){
@@ -93,7 +94,7 @@ class Problems extends  React.Component{
             <EmptyComp>
                 {redirect}
                 {this.state.problems ? (
-                    <form className={'form-inline'}>
+                    <form className={'form-inline mnb'}  >
                         <h1 className={"card-header"}>Please select the problems that you are facing.</h1>
                         {problems}
                         {/*<p id="other-problem">
@@ -108,6 +109,7 @@ class Problems extends  React.Component{
                         <div className={'btn-group'}>
                             {/*<button onClick={this.selfFix} disabled={!this.state.problemId}>Self Fix</button>*/}
                             <button onClick={this.requestRep} disabled={!this.state.problemId}>Request for Help</button>
+                            <button onClick={this.requestRep} disabled={!this.state.problemId}>Self Help</button>
                         </div>
                     </form>
                 ): null}

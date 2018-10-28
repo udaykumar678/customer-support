@@ -1,6 +1,7 @@
 .support-comp{
   width: 100%;
-  height: 500px;
+  height: 1100px;
+  padding-top: 100px;
   background-image: url(https://support.t-mobile.com/___sbsstatic___/sftp-sync/images/welcome/su-bg-horizon.png);
   background-color: rgba(0,0,0, 0.7);
   position: relative;

@@ -5,7 +5,9 @@ import NavBar from './NavBar/NavBar';
 import InfoBar from './InfoBar/InfoBar';
 import Support from './Support/Support';
 import Problems from './Problems/Problems';
+import HelpOnWay from './HelpOnWay/HelpOnWay';
 import Issues from './Issues/Issues';
+import Rep from './Rep/Rep';
 import SelfFix from './SelfFix/SelfFix';
 import './App.css';
 
@@ -20,8 +22,10 @@ class App extends Component {
                   <Switch>
                       <Route path="/user" exact component={Support} />
                       <Route path="/user/check-problems/:userId" component={Problems}/>
+                      <Route path="/user/check-problem/done" component={HelpOnWay}/>
                       <Route path="/user/self-fix/:pId" component={SelfFix}/>
                       <Route path="/admin/issues" component={Issues}/>
+                      <Route path="/rep/issues" component={Rep}/>
                       <Redirect from="/" to="/user"/>
                   </Switch>
               </div>

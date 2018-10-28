@@ -3,9 +3,9 @@ import axios from 'axios';
 
 import imageWrapper from '../../hoc/ImageWrapper';
 import EmptyComp from '../../hoc/EmptyComp';
-import './Support.css';
+import './HelpOnWay.css';
 
-class Support extends React.Component{
+class HelpOnWay extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -18,25 +18,25 @@ class Support extends React.Component{
         //this.props.history.push('user/check-problems/1');
     };
     componentDidMount(){
-        axios.get('http://localhost:9000/api/v1/users').then(resp => {
-            console.log(resp);
-            const users = resp.data;
-            const rIndex = Math.floor(Math.random() * users.length);
-            const rUser = users[rIndex];
-            this.setState({
-                user: rUser
-            });
-        }).catch(err => console.log(err.message));
+        // axios.get('http://localhost:9000/api/v1/users').then(resp => {
+        //     console.log(resp);
+        //     const users = resp.data;
+        //     const rIndex = Math.floor(Math.random() * users.length);
+        //     const rUser = users[rIndex];
+        //     this.setState({
+        //         user: rUser
+        //     });
+        // }).catch(err => console.log(err.message));
     }
     render(){
         return (
             <EmptyComp>
                 <h1 className={"header"}>WELCOME TO T-MOBILE SUPPORT</h1>
-                <div className={'helper'} onClick={this.clickHandler}>Help ?</div>
+                <div className={'helper'} >A Representative will get back to you very shortly</div>
             </EmptyComp>
         );
     }
 }
 
 
-export default imageWrapper(Support, 'support-comp');
+export default imageWrapper(HelpOnWay, 'support-comp');
