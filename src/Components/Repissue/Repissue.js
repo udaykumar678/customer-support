@@ -30,23 +30,30 @@ class Repissue extends React.Component{
         }).catch(err => console.log(err.message));
     }
     render(){
-        let data = this.state.data;
-        let issue = this.state.issue;
+        let data = null;
+        let issue = null;
+        let dom = null;
+        if(this.state.data && this.state.issue){
+            data = this.state.data;
+            issue = this.state.issue;
+            dom =      <table className={"all"}>
+            <tbody>
+
+                <tr><td>First Name: {data.firstname}</td><td>Last Name: {data.lastname}</td><td>Age: {data.age}</td><td>Sex: {data.sex}</td></tr>
+                <tr><td>Account Status: {data.account_stt}</td><td>Past Bill Issues: {data.amnt_bill_issues}</td><td>No of Disconnections: {data.amnt_disconnections_ten_min}</td><td>Total Tech Issues: {data.amnt_tech_issues}</td></tr>
+                <tr><td>Avg Bill Paid: {data.avg_bill_paid}</td><td>Avg data rate: {data.avg_speed}</td><td>Communication Pref: {data.common_interaction_type}</td><td>Device age: {data.device_age}</td></tr>
+                <tr><td>Failed login: {data.failed_acct_login}</td><td>Failed message(s):{data.failed_msg_amnt}</td><td>Issue origin: {data.issue_origin}</td><td>Issue status: Unresolved</td></tr>
+
+            </tbody>
+        </table>
+        }
         return (
             <EmptyComp>
                 <h1 className={"header"}>Issue Details</h1>
                 <div className={"tabel"} >
-                    <table>
-                        <tbody>
-                            <tr><td>First Name: {data.firstname}</td><td>Last Name: {data.lastname}</td><td>Age: {data.age}</td><td>Sex: {data.sex}</td></tr>
-                            <tr><td>Account Status: {data.account_stt}</td><td>Past Bill Issues: {data.amnt_bill_issues}</td><td>Ask SAM: {data.amnt_disconnections_ten_min}</td><td>Total Tech Issues: {data.amnt_tech_issues}</td></tr>
-                            <tr><td>Avg Bill Paid: {data.avg_bill_paid}</td><td>Avg data rate: {data.avg_speed}</td><td>Communication Pref: {data.common_interaction_type}</td><td>Device age: {data.device_age}</td></tr>
-                            <tr><td>Failed login: {data.failed_acct_login}</td>Failed message(s): <td>{data.failed_msg_amnt}</td><td></td><td></td></tr>
-                            <tr><td></td><td></td><td></td><td></td></tr>
-                            <tr><td></td><td></td><td></td><td></td></tr>
-                        </tbody>
-                    </table>
+                    {dom}
                 </div>
+                <div className={'update'} onClick={this.clickHandler}>Update</div>
             </EmptyComp>
         );
     }

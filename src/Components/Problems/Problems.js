@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
+import ReactDom from 'react-dom';
+import Popup from 'react-popup';
 
 import imageWrapper from '../../hoc/ImageWrapper';
 import EmptyComp from '../../hoc/EmptyComp';
@@ -77,6 +79,7 @@ class Problems extends  React.Component{
 
         });
     };
+
     render(){
         const userId = this.props.match.params.userId;
         let redirect = null;
@@ -109,7 +112,7 @@ class Problems extends  React.Component{
                         <div className={'btn-group'}>
                             {/*<button onClick={this.selfFix} disabled={!this.state.problemId}>Self Fix</button>*/}
                             <button onClick={this.requestRep} disabled={!this.state.problemId}>Request for Help</button>
-                            <button onClick={this.requestRep} disabled={!this.state.problemId}>Self Help</button>
+                            <button  >Self Help</button>
                         </div>
                     </form>
                 ): null}
