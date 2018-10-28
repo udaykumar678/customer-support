@@ -1,0 +1,20 @@
+.form-inline{
+    margin: 0 auto;
+    width: 80%;
+}
+.form-inline .card-header{
+    margin-top: 0;
+    color: #fff;
+}
+.form-inline label{
+    color: #fff;
+}
+
+.btn-group button{
+    margin: 20px;
+    width: 150px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #fff;
+    color: #e20074;
+}

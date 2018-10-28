@@ -1,0 +1,10 @@
+.info-bar{
+    background: #e20074;
+    padding: 5px 5px;
+    color: #fff;
+    text-align: right;
+}
+.info-bar .card-text{
+    margin: 0;
+    width: 90%;
+}

@@ -1,0 +1,26 @@
+#unav{
+    background: #fff;
+    margin: 10px;
+    padding: 0;
+}
+
+#unav ul{
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+#unav ul li{
+    margin: 5px 20px;
+}
+
+#unav ul li a{
+    text-decoration: none;
+    color: #767676;
+    font-weight: bolder;
+}
+#unav ul li a:hover, #unav ul li a:active{
+    color: #e20074;
+}
