@@ -14,30 +14,39 @@ class Rep extends React.Component{
     }
     clickHandler = () => {
         console.log(this.props);
-        this.props.history.push('user/check-problems/'+this.state.user.id);
+        // axios.get('http://localhost:9000/api/v1/rep/issue/555').then(resp => {
+        //     console.log(resp.data);
+        //     this.setState({
+        //         isLoading: false,
+        //         problems: resp.data.issue
+        //     });
+        // }).catch(err => console.log(err.message));
+        this.props.history.push('/rep/issue');
         //this.props.history.push('user/check-problems/1');
     };
     componentDidMount(){
         axios.get('http://localhost:9000/api/v1/rep/31').then(resp => {
             console.log(resp.data);
-            // this.setState({
-            //     isLoading: false,
-            //     problems: resp.data.genIssues
-            // });
+            this.setState({
+                isLoading: false,
+                problems: resp.data.issue
+            });
         }).catch(err => console.log(err.message));
     }
     render(){
+        let p = null;
         let problems = null;
         if(this.state.problems){
-            problems = this.state.problems.map(p => <p key={p.id}>
-                <input type="radio" name={"problem"} value={p.id} id={"problem-"+p.id} onClick={(event) => this.clickHandler(event, p)}/>
-                <label htmlFor={"problem-"+p.id}>{p.name + ' - '+ p.description}</label>
-            </p>);
+            p = this.state.problems;
+            problems = <table>
+                <tr><td>Account ID</td><td>Date</td><td>Issue Type</td></tr>
+                <tr onClick={(event) => this.clickHandler(event, p)}><td>{p.user_id}</td><td>{p.date}</td><td>Billing</td></tr>
+            </table>
         }
         return (
             <EmptyComp>
                 <h1 className={"header"}>Representative Dashboard</h1>
-                <div className={'helper'} onClick={this.clickHandler}>Help ?</div>
+                <div className={"listing"}>{problems}</div>
             </EmptyComp>
         );
     }

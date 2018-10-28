@@ -8,6 +8,7 @@ import Problems from './Problems/Problems';
 import HelpOnWay from './HelpOnWay/HelpOnWay';
 import Issues from './Issues/Issues';
 import Rep from './Rep/Rep';
+import Repissue from './Repissue/Repissue';
 import SelfFix from './SelfFix/SelfFix';
 import './App.css';
 
@@ -26,6 +27,7 @@ class App extends Component {
                       <Route path="/user/self-fix/:pId" component={SelfFix}/>
                       <Route path="/admin/issues" component={Issues}/>
                       <Route path="/rep/issues" component={Rep}/>
+                      <Route path="/rep/issue" component={Repissue}/>
                       <Redirect from="/" to="/user"/>
                   </Switch>
               </div>

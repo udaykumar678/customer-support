@@ -26,29 +26,4 @@
 .helper:hover{
     background-color: #fff;
     color: #e20074;
-    border-right: 0.5em;
-    border-left: 0.5em;
-}
-
-.listing table{
-    margin:auto;
-    width : 1200px;    
-    text-align: center;
-    font-size : 22px;
-}
-
-.listing td {
-    cursor: pointer;
-    list-style: none;
-    background: pink;
-    border: 1px solid gray;
-    /* display : inline-block; */
- 
-}
-
-.listing span {
-    margin: 10px 100px;
-    text-align: right;
-    border: 1px solid blue;
-    padding: 5px 20px;
 }
