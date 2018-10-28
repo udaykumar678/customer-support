@@ -15,12 +15,14 @@ class Problems extends  React.Component{
             problems: null,
             isLoading: false,
             userId: null,
-            error: false
+            error: false,
+            problem: null
         }
     }
-    clickHandler = (event) => {
+    clickHandler = (event, p) => {
         this.setState({
-            problemId: event.target.value
+            problemId: event.target.value,
+            problem: p
         });
     };
     changeHandler = (event) => {
@@ -33,10 +35,20 @@ class Problems extends  React.Component{
         const userId = this.props.match.params.userId;
         if(userId && this.state.userId !== userId){
             this.setState({isLoading: true, userId: userId});
-            axios.get('/api/user/help/'+userId).then(resp => {
-                this.setState({
-                    isLoading: false,
-                    problems: resp.data
+            axios.get('/user/help/'+userId).then(resp => {
+                axios.get('/user/issues/'+userId).then(resp => {
+                    /*let userIssue  = {};
+                    resp = resp.data;
+                    if(resp.userIssue) {
+                        userIssue.id = resp.userIssue.id;
+                        userIssue.name = resp.userIssue.id + " " + resp.userIssue.date;
+                        userIssue.description = "User Generated";
+                        resp.genIssues.push(userIssue);
+                    }*/
+                    this.setState({
+                        isLoading: false,
+                        problems: resp.genIssues
+                    });
                 });
             });
         }
@@ -47,13 +59,9 @@ class Problems extends  React.Component{
     };
     requestRep = (event) => {
         event.preventDefault();
-        const data = {
-            problemId: this.state.problemId,
-            description: this.state.problemDesc
-        };
-        axios.post('/api/user/issues', data).then(resp => {
-
+        axios.post('/api/user/issues', this.state.problem).then(resp => {
             sessionStorage.removeItem('description');
+            this.props.history.push('/');
         });
     };
     render(){
@@ -62,12 +70,11 @@ class Problems extends  React.Component{
         if(!userId){
             redirect = <Redirect to="/"/>
         }
-        let error = null;
         let problems = null;
         if(this.state.problems){
             problems = this.state.problems.map(p => <p key={p.id}>
-                <input type="radio" name={"problem"} value={p.id} id={"problem-"+p.id} onClick={this.clickHandler}/>
-                <label htmlFor={"problem-"+p.id}>{p.description}</label>
+                <input type="radio" name={"problem"} value={p.id} id={"problem-"+p.id} onClick={(event) => this.clickHandler(event, p)}/>
+                <label htmlFor={"problem-"+p.id}>{p.name + ' - '+ p.description}</label>
             </p>);
         }
         return (
@@ -77,17 +84,17 @@ class Problems extends  React.Component{
                     <form className={'form-inline'}>
                         <h1 className={"card-header"}>Please select the problems that you are facing.</h1>
                         {problems}
-                        <p id="other-problem">
+                        {/*<p id="other-problem">
                             <input type="radio" name={"problem"} value={"others"}
                                    onClick={this.clickHandler} disabled={false}
                                    id={"others"}/>
                             <label htmlFor={'other-problem'}>Others</label>
-                        </p>
+                        </p>*/}
                         <textarea rows={10} cols={50}
                                   value={this.state.value} onChange={this.changeHandler} placeholder={"Enter your comments here"}>
                     </textarea>
                         <div className={'btn-group'}>
-                            <button onClick={this.selfFix} disabled={!this.state.problemId}>Self Fix</button>
+                            {/*<button onClick={this.selfFix} disabled={!this.state.problemId}>Self Fix</button>*/}
                             <button onClick={this.requestRep} disabled={!this.state.problemId}>Request for Help</button>
                         </div>
                     </form>
